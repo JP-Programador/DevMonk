@@ -39,11 +39,11 @@ export default function Index() {
 
     async function inserir() {
         loading.current.continuousStart();
-      if(nome == '' || chamada == '' || curso == '' || turma == '')  {
+      if(nome === '' || chamada === '' || curso === '' || turma === '')  {
             toast.error('Todos Campos São Obrigatórios !')
       } else {
         if(chamada > 0) {
-            if (idAlterando == 0) {
+            if (idAlterando === 0) {
                 let r = await api.inserir(nome, chamada, curso, turma);
                 if (r.erro) 
                     toast.dark(r.erro)
@@ -51,7 +51,7 @@ export default function Index() {
                     toast.dark('Aluno Inserido, Com Sucesso!');
 
                 } else {
-                    let r = await api.alterar(idAlterando, nome, chamada, curso, turma);
+                     await api.alterar(idAlterando, nome, chamada, curso, turma);
                     toast.dark('Aluno alterado, Com Sucesso!');
     
               
@@ -129,7 +129,7 @@ confirmAlert({
             <Cabecalho />
           <div className="box-cadastrar"> 
                 <div className="mo"></div>
-                <div style={{fontFamily: "", fontStyle: "normal", fontWeight: "bold", color: "#3C3939", fontSize: '32px', marginLeft: "50px"}}>  {idAlterando == 0 ? 'Novo Aluno' : 'Alterando Aluno do id ' + idAlterando }  </div>
+                <div style={{fontFamily: "", fontStyle: "normal", fontWeight: "bold", color: "#3C3939", fontSize: '32px', marginLeft: "50px"}}>  {idAlterando === 0 ? 'Novo Aluno' : 'Alterando Aluno do id ' + idAlterando }  </div>
             <div className="box-input">
                 <div className="cada-inputs" > Nome: 
                 <input type="text" value={nome} onChange={e => SetNome(e.target.value)} />
@@ -142,7 +142,7 @@ confirmAlert({
                 </div>
                 <div className="cada-inputs">Turma:  <input type="text" value={turma} onChange={e => SetTurma(e.target.value)} />  
                 </div>
-                <button onClick={inserir}> {idAlterando == 0 ? 'Cadastrar' : 'Alterar'}</button>
+                <button onClick={inserir}> {idAlterando === 0 ? 'Cadastrar' : 'Alterar'}</button>
             </div>
           </div>
           <div className="matriculados">
@@ -162,7 +162,7 @@ confirmAlert({
               <tbody>
                  {alunos.map((item, i) =>
                     
-                    <tr className={i % 2 == 0 ? "linha" : " "}> 
+                    <tr className={i % 2 === 0 ? "linha" : " "}> 
                     <td>{item.id_matricula}</td>
                     <td title={item.nm_aluno}> {item.nm_aluno != null && item.nm_aluno.length >= 25 ? item.nm_aluno.substr(0, 25) + '...' : item.nm_aluno}</td>
                     <td>{item.nr_chamada}</td>
